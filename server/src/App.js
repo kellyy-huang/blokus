@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import Draggable from "react-draggable";
 
 const letterBank = [
   "A",
@@ -151,26 +152,35 @@ const letterBank = [
 function App() {
   const shuffled = letterBank.sort(() => Math.random() - 0.5);
   const [letters, setLetters] = useState(shuffled.slice(0, 13));
+  const [remainingLetters, setRemainingLetters] = useState(
+    shuffled.slice(13, letterBank.length)
+  );
 
   function showLetters() {
     let letterBank = [];
-    for (const l of letters) {
-      letterBank.push(<div className="letterContainer">{l}</div>);
+    for (const letter of letters) {
+      letterBank.push(
+        <Draggable>
+          <div className="letterContainer">{letter}</div>
+        </Draggable>
+      );
     }
     return letterBank;
   }
 
-  function newLetter() {
-    const letter = letterBank.pop();
+  function getNewLetter() {
+    const newLetter = remainingLetters.pop();
+    setLetters([...letters, newLetter]);
+    setRemainingLetters([...remainingLetters]);
   }
 
   return (
     <div className="App">
       <h1>fruitgrams</h1>
       <div>
-        <button onclick={newLetter()}>Get Letters!</button>
+        <button onClick={getNewLetter}>get another letter!</button>
       </div>
-      {showLetters()}
+      <div className="lettersBox">{showLetters()}</div>
     </div>
   );
 }
