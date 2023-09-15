@@ -1,153 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import Draggable from "react-draggable";
-
-const letterBank = [
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "A",
-  "B",
-  "B",
-  "B",
-  "C",
-  "C",
-  "C",
-  "D",
-  "D",
-  "D",
-  "D",
-  "D",
-  "D",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "E",
-  "F",
-  "F",
-  "F",
-  "G",
-  "G",
-  "G",
-  "G",
-  "H",
-  "H",
-  "H",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "I",
-  "J",
-  "J",
-  "K",
-  "K",
-  "L",
-  "L",
-  "L",
-  "L",
-  "L",
-  "M",
-  "M",
-  "M",
-  "N",
-  "N",
-  "N",
-  "N",
-  "N",
-  "N",
-  "N",
-  "N",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "O",
-  "P",
-  "P",
-  "P",
-  "Q",
-  "Q",
-  "R",
-  "R",
-  "R",
-  "R",
-  "R",
-  "R",
-  "R",
-  "R",
-  "R",
-  "S",
-  "S",
-  "S",
-  "S",
-  "S",
-  "S",
-  "T",
-  "T",
-  "T",
-  "T",
-  "T",
-  "T",
-  "T",
-  "T",
-  "T",
-  "U",
-  "U",
-  "U",
-  "U",
-  "U",
-  "U",
-  "V",
-  "V",
-  "V",
-  "W",
-  "W",
-  "W",
-  "X",
-  "X",
-  "Y",
-  "Y",
-  "Y",
-  "Z",
-  "Z",
-];
+import { letterBank } from "./letterBank.js";
 
 function App() {
   const shuffled = letterBank.sort(() => Math.random() - 0.5);
@@ -155,6 +9,7 @@ function App() {
   const [remainingLetters, setRemainingLetters] = useState(
     shuffled.slice(13, letterBank.length)
   );
+  const [gameStarted, setGameStarted] = useState(false);
 
   function showLetters() {
     let letterBank = [];
@@ -174,13 +29,29 @@ function App() {
     setRemainingLetters([...remainingLetters]);
   }
 
+  function finishGame() {
+    console.log("yayyy");
+  }
+
+  function startGame() {
+    setGameStarted(true);
+  }
+
+  function actionButton() {
+    if (gameStarted === true && remainingLetters.length > 0) {
+      return <button onClick={getNewLetter}>next letter!</button>;
+    } else if (gameStarted === true && remainingLetters.length === 0) {
+      return <button onClick={finishGame}>winner!!!!!</button>;
+    } else if (gameStarted === false) {
+      return <button onClick={startGame}>start game!</button>;
+    }
+  }
+
   return (
     <div className="App">
       <h1>fruitgrams</h1>
-      <div>
-        <button onClick={getNewLetter}>get another letter!</button>
-      </div>
-      <div className="lettersBox">{showLetters()}</div>
+      <div>{actionButton()}</div>
+      {gameStarted ? <div className="lettersBox">{showLetters()}</div> : null}
     </div>
   );
 }
