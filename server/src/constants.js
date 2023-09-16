@@ -144,3 +144,5 @@ export const letterBank = [
   "Z",
   "Z",
 ];
+
+export const themes = ["watermelon", "kiwi", "grape"];

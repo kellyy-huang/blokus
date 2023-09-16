@@ -1,15 +1,29 @@
 .App {
   text-align: center;
 }
-.letterContainer {
+.watermelon {
   background-color: lightpink;
+}
+.kiwi {
+  background-color: lightgreen;
+}
+.grape {
+  background-color: violet;
+}
+.letterContainer {
+  background-color: lightslategray;
+  font-weight: 800;
+  font-size: large;
   width: 40px;
   height: 40px;
 }
 .lettersBox {
+  background-color: inherit;
   display: flex;
   flex-direction: row;
   position: absolute; 
   padding-top: 500px;
+  width: 100%;
+  height: 100%;
 }
 
