@@ -11,17 +11,19 @@
   background-color: violet;
 }
 .letterContainer {
-  background-color: lightslategray;
+  background-color: lightgoldenrodyellow;
   font-weight: 800;
   font-size: large;
   width: 40px;
   height: 40px;
+  line-height: 2.2;
 }
 .lettersBox {
   background-color: inherit;
   display: flex;
   flex-direction: row;
   position: absolute; 
+  justify-content: center;
   padding-top: 500px;
   width: 100%;
   height: 100%;
